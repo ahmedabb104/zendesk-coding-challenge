@@ -1,9 +1,10 @@
+import requests
 from functions import *
 from connect import response
 
 # Main program loop
 def mainLoop():
-    quit = False
+    quit = False  # Allows us to keep the program running until the user exits
     option1 = False
     pageNumber = 1
     print("\n********** Welcome to the ticket viewer. **********")
@@ -12,7 +13,7 @@ def mainLoop():
         option = input()
         if option == "1":
             if len(response.json()["tickets"]) > 25:
-                option1 = True
+                option1 = True  # Allows us to stay in the pagination state until the user exits
                 while option1:
                     paginatedTickets(pageNumber)
                     nextorPrev = input()
@@ -20,13 +21,13 @@ def mainLoop():
                         print("\nThat is invalid input. Please input another number")
                         nextorPrev = input()
                     if (nextorPrev == "1"):
-                        pageNumber -= 1
+                        pageNumber -= 1  # Previous page
                     elif (nextorPrev == "2"):
-                        pageNumber += 1
+                        pageNumber += 1  # Next page
                     else:
-                        option1 = False
+                        option1 = False  # Exits the pagination state
             else:
-                parseTickets()
+                parseTickets()  # If less than or equal to 25 tickets, we don't need pagination
         elif option == "2":
             print("Please enter the number of the ticket you wish to view")
             ticketNum = input()
@@ -39,4 +40,9 @@ def mainLoop():
         else:
             print("Please enter a valid option")
 
-mainLoop()
+# Handling the API being unavailable, and running the program if it is available
+try:
+    response.raise_for_status()
+    mainLoop()
+except requests.exceptions.HTTPError:
+    print('Sorry, the API is unavailable or you have entered the wrong authorization. Please try again.')

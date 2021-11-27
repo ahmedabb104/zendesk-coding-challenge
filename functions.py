@@ -11,10 +11,10 @@ def mainMenu():
 def paginatedTickets(pageNum):
     ticketList = response.json()["tickets"]
     length = len(ticketList)
-    lastTicket = pageNum * 25
-    firstTicket = (pageNum - 1) * 25
+    lastTicket = pageNum * 25         # The last ticket number on the page
+    firstTicket = (pageNum - 1) * 25  # The first ticket number on the page
     if lastTicket > length:
-        lastTicket = length
+        lastTicket = length           # This is so we do not run into any index error
     for i in range(firstTicket, lastTicket):
         print(f"{ticketList[i]['id'] - 1}: '{ticketList[i]['subject']}' created at {ticketList[i]['created_at']} by {ticketList[i]['submitter_id']}")
     print("\nPress 1 to move to the previous page, 2 to move to the next page, or 3 to return to the menu")
