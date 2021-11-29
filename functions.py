@@ -29,7 +29,7 @@ def parseTickets(res):
     for ticket in res.json()["tickets"]:
         print(f"{ticket['id'] - 1}: '{ticket['subject']}' created at {ticket['created_at']} by {ticket['submitter_id']}")
 
-# Gives individual ticket details
+# Parses individual ticket details
 def individualTicket(res, ticketNum):
     ticket = res.json()["tickets"][int(ticketNum) - 1]
     print(f"\nTicket {ticket['id'] - 1}:\n  From: {ticket['submitter_id']}\n  On: {ticket['created_at']}\n  Subject: {ticket['subject']}\n  Message: {ticket['description']}\n")
@@ -39,7 +39,7 @@ def individualTicket(res, ticketNum):
     else:
         return 1
 
-# The main logic behind the program. Runs different code depending on the option picked. Will never take "3" as input, because of how it is implemented in main.py
+# The main logic behind the program. Runs different code depending on the option picked. Will never take "3" as an option, because of how it is implemented in main.py
 def optionPicked(res, option):
     if option == "1":
         if len(res.json()["tickets"]) > 25:
