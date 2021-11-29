@@ -3,7 +3,10 @@
 2. Clone this repository
 3. You need the requests and dotenv libraries. 
    * Enter the following in your terminal: `pip install requests python-dotenv`
-4. Create a .env file with two key value pairs: `API_EMAIL=ahmedabb101@gmail.com/token` and `API_TOKEN=` the token that I sent in the email
+4. Create a .env file with three keys: `URL`, `API_EMAIL`, and `API_TOKEN`
+   * Set `URL` to your custom Zendesk domain with the `/api/v2/tickets.json` endpoint
+   * Set `API_EMAIL` to your Zendesk email with `/token` appended to it
+   * Set `API_TOKEN` to a valid Zendesk API Token
 
 ## Usage Instructions
 1. Run main.py by navigating to the repository in your directory and entering the following in your terminal: `python main.py`
